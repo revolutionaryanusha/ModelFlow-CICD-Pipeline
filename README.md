@@ -47,7 +47,7 @@ pip install -r requirements.txt
 python app.py
 
 
-### Contributing
+## Contributing
 
 To contribute to this project, please follow these steps:
 
