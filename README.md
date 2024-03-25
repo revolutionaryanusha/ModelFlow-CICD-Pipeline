@@ -58,5 +58,5 @@ To contribute to this project, please follow these steps:
 5. Create a new Pull Request targeting the `dev` branch.
 
 
-trail push
+trail push 1
 
