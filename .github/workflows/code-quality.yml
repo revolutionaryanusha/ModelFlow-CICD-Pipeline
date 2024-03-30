@@ -49,8 +49,8 @@ jobs:
       - name: Merge to Test Branch
         run: |
           git config user.name 'GitHub Actions'
-          git config user.email '<your-email@example.com>'
-          git fetch origin test:test
-          git checkout test
-          git merge --no-ff ${{ github.sha }} -m "Merging changes from PR #${{ github.event.number }}"
+          git config user.email 'actions@github.com'
+          git fetch origin ${GITHUB_HEAD_REF}:${GITHUB_HEAD_REF} # Fetch the source branch
+          git checkout test # Ensure you're on the target branch
+          git merge origin/${GITHUB_HEAD_REF} -m "Merging changes from PR" # Merge the source branch
           git push origin test
