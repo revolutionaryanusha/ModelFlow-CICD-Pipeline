@@ -1,7 +1,6 @@
 # ModelFlow-CICD-Pipeline
+
 A comprehensive CI/CD pipeline setup for a Flask application, featuring automated testing, Docker containerization, and deployment. Designed to ensure code quality and streamline the development process.....
-
-
 
 # FlaskCI-CDPipeline
 
@@ -35,20 +34,17 @@ This repository demonstrates a complete Continuous Integration/Continuous Deploy
 
 ### Setup
 
- **Clone the Repository**
- https://github.com/revolutionaryanusha/ModelFlow-CICD-Pipeline.git
- 
+**Clone the Repository**
+https://github.com/revolutionaryanusha/ModelFlow-CICD-Pipeline.git
 
- **Navigate to the Repository**
+**Navigate to the Repository**
 cd FlaskCI-CDPipeline
-
 
 **Install Dependencies**
 pip install -r requirements.txt
 
- **Run the Flask Application Locally**
+**Run the Flask Application Locally**
 python app.py
-
 
 ## Contributing
 
@@ -60,7 +56,14 @@ To contribute to this project, please follow these steps:
 4. Push to the branch (`git push origin feature/YourFeature`).
 5. Create a new Pull Request targeting the `dev` branch.
 
-
+<<<<<<< HEAD
 trail push 1
+=======
 
+<<<<<<< HEAD
 #####----------------------------############
+=======
+trail push 2
+
+>>>>>>> 788b6b40aba1e085aa19b36952934b4f82e7d2b8
+>>>>>>> abe1bdb9d6c6efb089f794b935dad5f0d7e4b141
