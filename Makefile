@@ -11,3 +11,6 @@ build-docker:
 
 run-docker:
 	docker run -p 5000:5000 diabetes_prediction_app
+
+test:
+	python -m pytest tests/
