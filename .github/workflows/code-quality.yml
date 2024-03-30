@@ -29,14 +29,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          ref: ${{ github.head_ref }}
 
-      - name: Ensure Test Branch Exists
+      - name: Fetch Branches
         run: |
-          if ! git ls-remote --heads origin test | grep test; then
-            git branch test
-            git push origin test
-          fi
+          git fetch origin
+
+      - name: Checkout Target Branch
+        run: |
+          git checkout test || git checkout -b test origin/dev
 
       - name: Approval Check
         run: |
@@ -46,11 +46,7 @@ jobs:
             exit 1
           fi
 
-      - name: Merge to Test Branch
+      - name: Merge Changes
         run: |
-          git config user.name 'GitHub Actions'
-          git config user.email 'actions@github.com'
-          git fetch origin ${GITHUB_HEAD_REF}:${GITHUB_HEAD_REF} # Fetch the source branch
-          git checkout test # Ensure you're on the target branch
-          git merge origin/${GITHUB_HEAD_REF} -m "Merging changes from PR" # Merge the source branch
+          git merge origin/${GITHUB_HEAD_REF} --no-edit
           git push origin test
