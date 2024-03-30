@@ -1,15 +1,15 @@
-name: Code Quality Checks and Test Trigger
+name: Code Quality Checks and Automatic Merge to Test
 
 on:
-  pull_request:
+  push:
     branches: [dev]
 
 jobs:
-  flake8:
+  code_quality_check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
+      - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
           python-version: "3.8"
@@ -17,36 +17,27 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install flake8
-      - name: Run Flake8
+      - name: Run flake8
         run: |
           flake8 .
 
-  merge-to-test:
+  auto_merge_to_test:
+    needs: code_quality_check
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'opened'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Fetch Branches
+      - name: Configure Git
+        run: |
+          git config user.name 'GitHub Actions'
+          git config user.email 'actions@github.com'
+
+      - name: Merge dev into test
         run: |
           git fetch origin
-
-      - name: Checkout Target Branch
-        run: |
-          git checkout test || git checkout -b test origin/dev
-
-      - name: Approval Check
-        run: |
-          sender_login=$(jq -r ".sender.login" $GITHUB_EVENT_PATH)
-          if [ "$sender_login" != "revolutionaryanusha" ]; then
-            echo "Error: Only the admin user can initiate this PR."
-            exit 1
-          fi
-
-      - name: Merge Changes
-        run: |
-          git merge origin/${GITHUB_HEAD_REF} --no-edit
+          git checkout test || git checkout -b test
+          git merge origin/dev --no-ff --no-edit
           git push origin test
