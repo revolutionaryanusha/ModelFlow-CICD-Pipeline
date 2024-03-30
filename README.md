@@ -56,14 +56,3 @@ To contribute to this project, please follow these steps:
 4. Push to the branch (`git push origin feature/YourFeature`).
 5. Create a new Pull Request targeting the `dev` branch.
 
-<<<<<<< HEAD
-trail push 1
-=======
-
-<<<<<<< HEAD
-#####----------------------------############
-=======
-trail push 2
-
->>>>>>> 788b6b40aba1e085aa19b36952934b4f82e7d2b8
->>>>>>> abe1bdb9d6c6efb089f794b935dad5f0d7e4b141
