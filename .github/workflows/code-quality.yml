@@ -1,8 +1,8 @@
 name: Code Quality Checks and Test Trigger
 
-on: 
+on:
   pull_request:
-    branches: [ dev ]
+    branches: [dev]
 
 jobs:
   flake8:
@@ -12,7 +12,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: "3.8"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -21,23 +21,25 @@ jobs:
         run: |
           flake8 .
 
-  merge-to-test:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action == 'opened'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-      - name: Approval Check
-        run: |
-          # Logic to check if the user initiating the PR is an admin
-          # Replace this with your admin approval logic
-          if [ ! "$(github.event.sender.login)" == "revolutionaryanusha" ]; then exit 1; fi
-      - name: Merge to test branch
-        run: |
-          git config user.name 'GitHub Actions'
-          git config user.email '<>'
-          git checkout test
-          git merge --no-ff ${{ github.event.pull_request.head.sha }}
-          git push origin test
+merge-to-test:
+  runs-on: ubuntu-latest
+  if: github.event_name == 'pull_request' && github.event.action == 'opened'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+    - name: Approval Check
+      run: |
+        sender_login=$(jq -r ".sender.login" $GITHUB_EVENT_PATH)
+        if [ "$sender_login" != "revolutionaryanusha" ]; then
+          echo "Error: Only the admin user can initiate this PR."
+          exit 1
+        fi
+    - name: Merge to test branch
+      run: |
+        git config user.name 'GitHub Actions'
+        git config user.email '<>'
+        git checkout test
+        git merge --no-ff ${{ github.event.pull_request.head.sha }}
+        git push origin test
