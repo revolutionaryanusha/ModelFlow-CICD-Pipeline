@@ -3,11 +3,14 @@ import joblib
 
 app = Flask(__name__)
 
+
 # Load the trained model
-model = joblib.load("model.pkl")  # Ensure this matches your saved model file name
+model = joblib.load("model.pkl")  
 
 
 @app.route('/predict', methods=['POST'])
+
+
 def predict():
     data = request.get_json(force=True)
     prediction = model.predict([data['features']])
