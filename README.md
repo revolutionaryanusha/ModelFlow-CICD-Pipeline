@@ -5,7 +5,10 @@ A comprehensive CI/CD pipeline setup for a Flask application, featuring automate
 
 # FlaskCI-CDPipeline
 
-This repository demonstrates a complete Continuous Integration/Continuous Deployment (CI/CD) pipeline for a Flask-based application. It integrates several modern development tools and practices to ensure a streamlined workflow from development to deployment.
+This repository demonstrates a complete Continuous Integration/Continuous Deployment (CI/CD) pipeline for a Flask-based application. It integrates several modern development tools and practices to ensure a streamlined workflow from development to deployment.   
+
+
+
 
 ## Features
 
@@ -60,3 +63,4 @@ To contribute to this project, please follow these steps:
 
 trail push 1
 
+#####----------------------------############
