@@ -28,7 +28,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Ensure Test Branch Exists
+        run: |
+          if ! git ls-remote --heads origin test | grep test; then
+            git branch test
+            git push origin test
+          fi
+
       - name: Approval Check
         run: |
           sender_login=$(jq -r ".sender.login" $GITHUB_EVENT_PATH)
@@ -36,10 +45,12 @@ jobs:
             echo "Error: Only the admin user can initiate this PR."
             exit 1
           fi
-      - name: Merge to test branch
+
+      - name: Merge to Test Branch
         run: |
           git config user.name 'GitHub Actions'
-          git config user.email '<>'
+          git config user.email '<your-email@example.com>'
+          git fetch origin test:test
           git checkout test
-          git merge --no-ff ${{ github.event.pull_request.head.sha }}
+          git merge --no-ff ${{ github.sha }} -m "Merging changes from PR #${{ github.event.number }}"
           git push origin test
