@@ -2,4 +2,8 @@ Flask
 pandas
 scikit-learn
 joblib
+<<<<<<< HEAD
 pytest
+=======
+pytest
+>>>>>>> b57c09a5182bcd4ba40d15ffbcff3e93a86bb408
