@@ -17,4 +17,5 @@ def test_predict_endpoint(client):
     data = json.loads(response.data)
     assert 'prediction' in data
     assert isinstance(data['prediction'], list)
-    assert data['prediction'] == [1] 
+    assert data['prediction'] == [1]
+    
