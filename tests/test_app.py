@@ -18,4 +18,3 @@ def test_predict_endpoint(client):
     assert 'prediction' in data
     assert isinstance(data['prediction'], list)
     assert data['prediction'] == [1]
-    
