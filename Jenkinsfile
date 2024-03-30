@@ -17,7 +17,7 @@ pipeline {
         
         stage('Publish') {
             when {
-                branch 'master' // Only trigger this stage when changes are merged into master
+                branch 'main' // Only trigger this stage when changes are merged into master
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
