@@ -9,8 +9,6 @@ model = joblib.load("app/model.pkl")
 
 
 @app.route('/predict', methods=['POST'])
-
-
 def predict():
     data = request.get_json(force=True)
     prediction = model.predict([data['features']])
